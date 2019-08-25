@@ -1,6 +1,9 @@
 <div class="container">
     <div class="jumbotron">
         <h1>Web Scraper App</h1>
+        <form action="/scrape" method="post">
+            <button class="get-articles" type="submit">Get Articles</button>
+        </form>
     </div>
 </div>
 <div class="row">
@@ -10,8 +13,8 @@
                 <h5 class="card-title">Articles to Read</h5>
                 <ul class="list-group">
                     {{#each articles}}
-                    <span>{{id}} - {{title}}</span><button value={{this.id}} type="submit"
-                        class="btn btn-success read-button">Read</button>
+                    <span>{{id}} - {{title}} - {{link}}</span><button value={{this.id}} type="submit"
+                        class="btn btn-success note-button">Write Note</button>
                     {{/each}}
                 </ul>
             </div>
