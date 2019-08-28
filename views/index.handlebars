@@ -13,8 +13,29 @@
                 <h5 class="card-title">Articles to Read</h5>
                 <ul class="list-group">
                     {{#each articles}}
-                    <span>{{id}} - {{title}} - {{link}}</span><button value={{this.id}} type="submit"
-                        class="btn btn-success note-button">Write Note</button>
+                    <span>{{_id}} - {{title}} - {{link}}</span>
+                    <button value="{{_id}}" type="button" class="btn btn-success note-button"
+                        data-toggle="modal">Write a Note</button>
+                    <div id="note-modal" class="modal fade show" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Note</h5>
+                                    <button type="submit" class="note-update" data-dismiss="modal"></button>
+                                        <span>Save Note</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="message-text" class="col-form-label">Note:</label>
+                                            <textarea class="form-control" id="note-text"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {{/each}}
                 </ul>
             </div>
