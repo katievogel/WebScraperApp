@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+mongoose.set('useCreateIndex', true);
 
 var Schema = mongoose.Schema;
 
@@ -10,6 +11,8 @@ var ArticleSchema = new Schema({
 
     link: {
         type: String,
+        unique: true,
+        index: true,
         required: true
     },
 
