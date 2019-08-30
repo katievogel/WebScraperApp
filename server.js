@@ -23,6 +23,7 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+//renders main page with articles already in db, if there.
 app.get("/", function (req, res) {
     console.log("initial page load works");
     var articlesCursor = connection.db.collection('articles').find({});
@@ -35,6 +36,7 @@ app.get("/", function (req, res) {
     })
 })
 
+//scraping articles, putting them in the db, displaying to page if not already there
 app.post("/scrape", function (req, res) {
     console.log("app.get to scrape is working");
     axios.get("https://old.reddit.com/r/aww/").then(function (response) {
@@ -49,21 +51,21 @@ app.post("/scrape", function (req, res) {
             console.log(result)
         });
 
-        // 2.
+        //putting all the 'updateOne's that would occur in one array called 'promises' so you only have to have to write one promise instead of a billion .then's later on. Makes sure duplicates are avoided with the upsert
         var promises = []
-        for (var i = 0; i < results.length; i++){
+        for (var i = 0; i < results.length; i++) {
             var result = results[i];
-            var p = db.Article.updateOne({ link: result.link }, result, {upsert: true});
+            var p = db.Article.updateOne({ link: result.link }, result, { upsert: true });
             promises.push(p);
         }
-        
-        // 3.
+
+        //all the items in the promises array being run together with the promise.all. Shows all that were updated.
         var finishedResult = Promise.all(promises);
-        finishedResult.then(function (objectsUpdated) {  
+        finishedResult.then(function (objectsUpdated) {
             var articlesCursor = connection.db.collection('articles').find({});
             var articles = articlesCursor.toArray().then(function (articles) {
                 console.log("final list of articles" + JSON.stringify(articles));
-                res.render("index", { articles: articles});
+                res.render("index", { articles: articles });
             });
         })
 
@@ -72,7 +74,7 @@ app.post("/scrape", function (req, res) {
     });
 
 });
-
+//adds a note to the db for an article if a user creates one
 app.put("/notes/:id", function (req, res) {
     console.log(req.body);
     db.Article.findOneAndUpdate({ _id: req.params.id }, { note: req.body.body }, { new: true }).then(function (dbArticle) {
