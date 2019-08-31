@@ -7,7 +7,7 @@ mongoose.set('useCreateIndex', true);
 
 var db = require("./models");
 
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 var app = express();
 
@@ -40,7 +40,7 @@ app.get("/", function (req, res) {
 app.post("/scrape", function (req, res) {
     console.log("app.get to scrape is working");
     axios.get("https://old.reddit.com/r/aww/").then(function (response) {
-        //I set this as 'ch' instead of '$' so I wouldn't confuse it with jquery.
+        //I set this as 'ch' instead of '$' so I wouldn't confuse it with jquery. Also missed the requirement to capture a summary. There wasn't one on the source i used so I opted for a thumbnail image instead.
         var ch = cheerio.load(response.data);
         var results = [];
         ch("div.link").each(function (i, element) {
