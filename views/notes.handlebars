@@ -2,8 +2,9 @@
     <div class="jumbotron">
         <h1>Web Scraper App</h1>
         <form action="/scrape" method="post">
-            <button class="get-articles" type="submit">Get Articles</button>
+            <button class="get-articles" type="submit" style="display:none">Get Articles</button>
         </form>
+        <a href="/">Return to Articles</a>
         <form action="/notes" method="get">
             <button class="get-notes" type="submit">View Notes</button>
         </form>
@@ -12,24 +13,24 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Articles to Read</h5>
+            <div class="card-body notes-body">
+                <h5 class="card-title">Articles with Notes</h5>
                 <table>
                     <tbody>
                         {{#each articles}}
                         <tr>
-                            <td class="title-n-link">
+                            <td class="title-n-none">
                                 <ul>
                                 <span class="dbID" style="display:none">{{_id}}</span>
                                 <li class="artTitle">{{title}}</li>
-                                <li class="artLink">{{link}}</li>
                                 </ul>
                             </td>
                             <td class="button-col">
-                                <button value="{{_id}}" type="button" class="btn btn-success note-button"
-                                    data-toggle="modal">Write a Note</button>
-                                    <button value="{{_id}}" type="button" class="btn btn-danger del-art"
-                                    >Delete Article</button>
+                                <ul>
+                                    <li class="artNote">{{note}}</li>
+                                <li><button value="{{_id}}" type="button" class="btn btn-success note-button"
+                                    data-toggle="modal">Edit a Note</button></li>
+                                    </ul>
                             </td>
                         </tr>
                         <div id="note-modal" class="modal fade show" role="dialog">
@@ -37,13 +38,13 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">Note</h5>
-                                        <button type="submit" class="note-update" data-dismiss="modal"></button>Save
+                                        <button type="submit" class="note-update" data-dismiss="modal">Save</button>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <form>
                                             <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Note:</label>
+                                                <label for="message-text" class="col-form-label">Note</label>
                                                 <textarea class="form-control" id="note-text"></textarea>
                                             </div>
                                         </form>

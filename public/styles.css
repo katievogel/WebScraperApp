@@ -1,0 +1,37 @@
+.card-body, .card, .col-lg-12 {
+    margin: auto;
+    max-width: 960px;
+}
+
+table, tbody, tr {
+    width: 900px!important;
+}
+.notes-body {
+    margin: 10px;
+}
+
+.get-articles, .get-notes {
+    max-width: 200px;
+    margin: 10px;
+}
+
+.note-button {
+    max-width: 200px;
+    margin: 10px 10px 10px 0px;
+}
+
+li {
+    list-style: none;
+}
+
+.title-n-link, .title-n-none {
+    max-width: 600px;
+}
+
+.button-col {
+    max-width: 300px;
+}
+
+ul {
+    padding: 0!important;
+}

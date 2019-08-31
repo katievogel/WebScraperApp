@@ -20,3 +20,14 @@ $(".note-update").on("click", function(event){
         console.log("note has been saved to " + id)
     });
 });
+
+$(".del-art").on("click", function(event){
+    event.preventDefault();
+    var id = event.target.value;
+    $.ajax("/scrape/" + id, {
+        type: "DELETE"
+    }).then(function(){
+        console.log("removed: " + id);
+        location.reload();
+    });
+});

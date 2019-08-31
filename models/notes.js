@@ -3,8 +3,15 @@
 // var Schema = mongoose.Schema;
 
 // var NotesSchema = new Schema({
-//     body: String
-// });
+//     title: {
+//         type: String,
+//         required: true
+//     },
+//     note: {
+//         body: String,
+//         required: true
+//         }
+//     });
 
 // var Note = mongoose.model("notes", NotesSchema);
 

@@ -33,10 +33,10 @@ app.get("/", function (req, res) {
             articles: articles
         };
         res.render("index", hbsParams);
-    })
-})
+    });
+});
 
-//scraping articles, putting them in the db, displaying to page if not already there
+//scraping articles, putting them in the db, displaying to page if not already there. if there are none in the db, this will populate them there and display on the page. if there are some already on the page it scrape, add only the new ones to the db, and add the new ones to the page
 app.post("/scrape", function (req, res) {
     console.log("app.get to scrape is working");
     axios.get("https://old.reddit.com/r/aww/").then(function (response) {
@@ -57,7 +57,7 @@ app.post("/scrape", function (req, res) {
             var result = results[i];
             var p = db.Article.updateOne({ link: result.link }, result, { upsert: true });
             promises.push(p);
-        }
+        };
 
         //all the items in the promises array being run together with the promise.all. Shows all that were updated.
         var finishedResult = Promise.all(promises);
@@ -67,13 +67,12 @@ app.post("/scrape", function (req, res) {
                 console.log("final list of articles" + JSON.stringify(articles));
                 res.render("index", { articles: articles });
             });
-        })
-
+        });
     }).catch(function (err) {
         res.json(err);
     });
-
 });
+
 //adds a note to the db for an article if a user creates one
 app.put("/notes/:id", function (req, res) {
     console.log(req.body);
@@ -82,6 +81,21 @@ app.put("/notes/:id", function (req, res) {
         res.json(dbArticle);
     }).catch(function (err) {
         res.json(err);
+    });
+});
+
+app.get("/notes", function (req, res){
+    db.Article.find({note: {$exists: true}}).then(function(articles){
+        console.log("title and notes:" + JSON.stringify(articles));
+        res.render("notes",
+        {articles:  articles});
+    });
+});
+
+app.delete("/scrape/:id", function (req, res){
+    db.Article.findOneAndDelete({_id: req.params.id}).then(function(removed){
+        console.log("removed article: " + JSON.stringify(removed));
+        res.send();
     });
 });
 
