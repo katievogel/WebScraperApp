@@ -43,10 +43,11 @@ app.post("/scrape", function (req, res) {
         //I set this as 'ch' instead of '$' so I wouldn't confuse it with jquery.
         var ch = cheerio.load(response.data);
         var results = [];
-        ch("p.title").each(function (i, element) {
+        ch("div.link").each(function (i, element) {
             var result = {};
-            result.title = ch(this).children("a").text();
-            result.link = ch(this).children("a").attr("href");
+            result.title = ch(this).find("p.title a").text();
+            result.image = ch(this).find("a.thumbnail img").attr("src");
+            result.link = ch(this).find("p.title a").attr("href");
             results.push(result);
             console.log(result)
         });
@@ -73,7 +74,7 @@ app.post("/scrape", function (req, res) {
     });
 });
 
-//adds a note to the db for an article if a user creates one
+//adds a note to the db for an article if a user creates one. Notes notes noootes!!
 app.put("/notes/:id", function (req, res) {
     console.log(req.body);
     db.Article.findOneAndUpdate({ _id: req.params.id }, { note: req.body.body }, { new: true }).then(function (dbArticle) {
@@ -86,7 +87,7 @@ app.put("/notes/:id", function (req, res) {
 
 app.get("/notes", function (req, res){
     db.Article.find({note: {$exists: true}}).then(function(articles){
-        console.log("title and notes:" + JSON.stringify(articles));
+        console.log("title, image, notes:" + JSON.stringify(articles));
         res.render("notes",
         {articles:  articles});
     });

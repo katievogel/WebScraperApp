@@ -17,7 +17,8 @@ $(".note-update").on("click", function(event){
         type: "PUT",
         data: newNoteUpdate
     }).then(function(){
-        console.log("note has been saved to " + id)
+        console.log("note has been saved to " + id);
+        location.reload();
     });
 });
 
