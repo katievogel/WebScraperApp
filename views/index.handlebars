@@ -1,19 +1,21 @@
 <div class="container">
     <div class="jumbotron">
-        <h1>Web Scraper App</h1>
+        <h1>Awwwww Scraper</h1>
+            <div>
         <form action="/scrape" method="post">
-            <button class="get-articles" type="submit">Get Articles</button>
+            <button class="btn btn-secondary get-articles" type="submit">Get Cuteness</button>
         </form>
         <form action="/notes" method="get">
-            <button class="get-notes" type="submit">View Notes</button>
+            <button class="btn btn-secondary get-notes" type="submit">View Notes</button>
         </form>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Articles to Read</h5>
+                <h3 class="card-title">Cuteness to See</h3>
                 <table>
                     <tbody>
                         {{#each articles}}
@@ -22,7 +24,11 @@
                                 <ul>
                                 <span class="dbID" style="display:none">{{_id}}</span>
                                 <li class="artTitle">{{title}}</li>
-                                <li class="artLink">{{link}}</li>
+                                <li class="artLink">
+                                    <a href="{{link}}">
+                                        {{link}}
+                                    </a>
+                                    </li>
                                 </ul>
                             </td>
                             <td class="button-col">

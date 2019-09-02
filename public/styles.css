@@ -1,18 +1,49 @@
-.card-body, .card, .col-lg-12 {
+body {
+    background-color: #daf4fa;
+    background-image: url("https://www.transparenttextures.com/patterns/tree-bark.png");
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+h1, h3 {
+    font-family: 'Fredericka the Great', cursive;
+}
+
+.jumbotron {
+    max-width: 960px!important;
+    margin: 30px auto;
+    padding: auto 15px;
+    background-color: #fcfbea46;
+    background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
+}
+
+ .card {
     margin: auto;
     max-width: 960px;
+    background-color: #fcfbea46;
+    background-image: url("https://www.transparenttextures.com/patterns/binding-dark.png");
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+
+.row, .card-body, .col-lg-12 {
+    margin: auto;
+    max-width: 960px;
+    background-color: none;
 }
 
 table, tbody, tr {
     width: 900px!important;
+    background-color: none;
+
 }
 .notes-body {
     margin: 10px;
 }
 
+form {
+    display: inline-block;
+}
 .get-articles, .get-notes {
     max-width: 200px;
-    margin: 10px;
+    margin: 10px; 
 }
 
 .note-button {
@@ -34,4 +65,25 @@ li {
 
 ul {
     padding: 0!important;
+}
+
+.artTitle {
+    font-family: 'Baloo Chettan', cursive;
+}
+
+.artLink {
+    font-family: 'Pontano Sans', sans-serif;
+}
+
+button {
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+    font-family: 'Chewy', cursive;
+}
+
+.artNote {
+    font-family: 'Pontano Sans', sans-serif;
+}
+
+.return {
+    font-family: 'Chewy', cursive;
 }
